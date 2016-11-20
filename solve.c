@@ -5,7 +5,7 @@ int main()
 {
     FILE *fp;
     fp=fopen("output.csv","w");
-    float origin[25]={348,352,347,349,347.5,347,330,329,329,327.5,329,331.5,348.5,347,346.5,348,333,330,332.5,331.5,331.5,332,332};
+    float origin[25]={348,352,347,349,347.5,347,330,329,329,327.5,329,331.5,348.5,347,346.5,348,347.5,348,333,330,332.5,331.5,331.5,332,332};
     float target[25]={0};
     float total[5]={0};
     int times=0;
@@ -39,7 +39,7 @@ int main()
         target[n]=0;
         total[n/5]=0;
       }
-      if(r_times%100000==0)
+      if(r_times%500000==0)
       {
         printf("Number of possible solution found in %d times run:%d\n",r_times,times);
         printf("counting...(PRESS CTRL+C to stop.)\n");
