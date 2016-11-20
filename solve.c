@@ -45,7 +45,7 @@ int main()
         printf("counting...(PRESS CTRL+C to stop.)\n");
       }
       r_times++;
-      if(r_times>20000000000&&times==0)
+      if(r_times>200000000&&times==0)
         printf("No solution found.");
     }
 }
