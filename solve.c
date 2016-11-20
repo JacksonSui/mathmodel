@@ -4,11 +4,12 @@ int rand1(void);
 int main()
 {
     FILE *fp=fopen("output.csv","w");//确定输出文件名
-    float origin[25]={348,352,347,349,347.5,347,330,329,329,327.5,329,331.5,348.5,347,346.5,348,347.5,348,333,330,332.5,331.5,331.5,332,332};
-    float target[25]={0};//存储随机分配的工件质量
-    float total[5]={0};//存储每一次计算出的的各扇形零件的质量和
-    int solve=0;//存储已求得解的个数
+    float origin[25]={348,352,347,349,347.5,347,330,329,329,327.5,329,331.5,348.5,347,346.5,348,347.5,348,333,330,332.5,331.5,331.5,332,332}; 
+    float target[25]={0};//建立随机分配的工件质量数组
+    float total[5]={0};//建立每一次计算出的的各扇形零件质量和数组
+    int solve=0;//记录已求得解的个数
     int runtime=0;//记录程序运行的次数
+
     int index,m,max;
     printf("Please enter the max value:");
     scanf("%d",&max);
@@ -57,7 +58,7 @@ int main()
 
 int rand1(void)
 {
-  static int arr[25]={-1};//存储每个运行周期所分配的随机索引
+  static int arr[25]={-1};//建立每个运行周期所分配的随机索引数组
   static int times=0;
   int a;
   int n=(unsigned int)rand()%25;
