@@ -4,12 +4,11 @@ int rand1(void);
 int main()
 {
     FILE *fp=fopen("output.csv","w");//确定输出文件名
-    float origin[25]={348,352,347,349,347.5,347,330,329,329,327.5,329,331.5,348.5,347,346.5,348,347.5,348,333,330,332.5,331.5,331.5,332,332}; 
+    float origin[25]={348,352,347,349,347.5,347,330,329,329,327.5,329,331.5,348.5,347,346.5,348,347.5,348,333,330,332.5,331.5,331.5,332,332};
     float target[25]={0};//建立随机分配的工件质量数组
     float total[5]={0};//建立每一次计算出的的各扇形零件质量和数组
     int solve=0;//记录已求得解的个数
     int runtime=0;//记录程序运行的次数
-
     int index,m,max;
     printf("Please enter the max value:");
     scanf("%d",&max);
@@ -18,7 +17,7 @@ int main()
     {
       for(m=0;m<25;m++)
       {
-        index=rand1();
+        index=rand1();//随机分配索引
         target[index]=origin[m];
       }
       for(m=0;m<25;m++)
@@ -66,13 +65,13 @@ int rand1(void)
   {
     for(a=0;a<24;a++)
     {
-      if(n!=arr[a]&&times!=0)
+      if(n!=arr[a]&&times!=0)//保证在同一个运行周期中随机分配的索引各不相同
         continue;
       break;
     }
     if(a==24||times==0)
     {
-      arr[times]=n;
+      arr[times]=n;//
       times++;
       break;
     }
@@ -84,7 +83,6 @@ int rand1(void)
     times=0;
     for(a=0;a<25;a++)
       arr[a]=-1;
-  }
-
-  return n;
+  }//运行周期结束，清空记录的索引
+return n;
 }
