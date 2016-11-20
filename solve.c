@@ -32,7 +32,9 @@ int main()
         for(m=0;m<5;m++)
           fprintf(fp,"%.1f,",total[m]);
         fprintf(fp,"\n");
+        fflush(fp);
           times++;
+          
       }
       for(n=0;n<25;n++)
       {
@@ -45,7 +47,12 @@ int main()
         printf("counting...(PRESS CTRL+C to stop.)\n");
       }
       r_times++;
-      if(r_times>200000000&&times==0)
+      if(r_times==200000000||times==10000)
+      {
+        printf("enough.");
+        break;
+      }
+      if(r_times==200000000&&times==0)
         printf("No solution found.");
     }
 }
