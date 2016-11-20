@@ -70,7 +70,7 @@ int rand1(void)
     }
     if(a==24||times==0)
     {
-      randindex[times]=n;//
+      randindex[times]=n;
       times++;
       break;
     }
