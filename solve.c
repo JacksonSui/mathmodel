@@ -3,14 +3,13 @@
 int rand1(void);
 int main()
 {
-    FILE *fp;
-    fp=fopen("output.csv","w");
+    FILE *fp=fopen("output.csv","w");//确定输出文件名
     float origin[25]={348,352,347,349,347.5,347,330,329,329,327.5,329,331.5,348.5,347,346.5,348,347.5,348,333,330,332.5,331.5,331.5,332,332};
-    float target[25]={0};
-    float total[5]={0};
-    int times=0;
-    int r_times=0;
-    int k,m,n,t,max;
+    float target[25]={0};//存储随机分配的工件质量
+    float total[5]={0};//存储每一次计算出的的各扇形零件的质量和
+    int solve=0;//存储已求得解的个数
+    int runtime=0;//记录程序运行的次数
+    int index,m,max;
     printf("Please enter the max value:");
     scanf("%d",&max);
     getchar();
@@ -18,14 +17,12 @@ int main()
     {
       for(m=0;m<25;m++)
       {
-        k=rand1();
-        target[k]=origin[m];
+        index=rand1();
+        target[index]=origin[m];
       }
-      for(n=0;n<25;n++)
-      {
-        total[n/5] += target[n];
-      }
-	    if(abs(total[0]-total[1])<max&&abs(total[1]-total[2])<max&&abs(total[2]-total[3])<max&&abs(total[3]-total[4])<max&&abs(total[4]-total[0])<max)
+      for(m=0;m<25;m++)
+        total[m/5] += target[m];
+      if(abs(total[0]-total[1])<max&&abs(total[1]-total[2])<max&&abs(total[2]-total[3])<max&&abs(total[3]-total[4])<max&&abs(total[4]-total[0])<max)
       {
         for(m=0;m<25;m++)
           fprintf(fp,"%.1f,",target[m]);
@@ -33,33 +30,34 @@ int main()
           fprintf(fp,"%.1f,",total[m]);
         fprintf(fp,"\n");
         fflush(fp);
-          times++;
-          
+	      solve++;
       }
-      for(n=0;n<25;n++)
+      for(m=0;m<25;m++)
       {
-        target[n]=0;
-        total[n/5]=0;
+        target[m]=0;
+        total[m/5]=0;
       }
-      if(r_times%500000==0)
+      if(runtime%500000==0)
       {
-        printf("Number of possible solution found in %d times run:%d\n",r_times,times);
+        printf("Number of possible solution found in %d solve run:%d\n",runtime,solve);
         printf("counting...(PRESS CTRL+C to stop.)\n");
       }
-      r_times++;
-      if(r_times==200000000||times==10000)
+      runtime++;
+      if(runtime==100000000||solve==10000)
       {
-        printf("enough.");
-        break;
+	       printf("enough.");
+	       break;
       }
-      if(r_times==200000000&&times==0)
+      if(runtime==100000000&&solve==0)
+      {
         printf("No solution found.");
+        break;
     }
 }
 
 int rand1(void)
 {
-  static int arr[25]={-1};
+  static int arr[25]={-1};//存储每个运行周期所分配的随机索引
   static int times=0;
   int a;
   int n=(unsigned int)rand()%25;
