@@ -23,8 +23,7 @@ int main()
       for(m=0;m<25;m++)
         total[m/5] += target[m];
       if(abs(total[0]-total[1])<max&&abs(total[1]-total[2])<max&&abs(total[2]-total[3])<max&&abs(total[3]-total[4])<max&&abs(total[4]-total[0])<max)
-      {
-        for(m=0;m<25;m++)
+      {        for(m=0;m<25;m++)
           fprintf(fp,"%.1f,",target[m]);
         for(m=0;m<5;m++)
           fprintf(fp,"%.1f,",total[m]);
@@ -57,7 +56,7 @@ int main()
 
 int rand1(void)
 {
-  static int arr[25]={-1};//建立每个运行周期所分配的随机索引数组
+  static int randindex[25]={-1};//建立每个运行周期所分配的随机索引数组
   static int times=0;
   int a;
   int n=(unsigned int)rand()%25;
@@ -65,13 +64,13 @@ int rand1(void)
   {
     for(a=0;a<24;a++)
     {
-      if(n!=arr[a]&&times!=0)//保证在同一个运行周期中随机分配的索引各不相同
+      if(n!==randinde[a]&&times!=0)//保证在同一个运行周期中随机分配的索引各不相同
         continue;
       break;
     }
     if(a==24||times==0)
     {
-      arr[times]=n;//
+      randindex[times]=n;//
       times++;
       break;
     }
@@ -82,7 +81,7 @@ int rand1(void)
   {
     times=0;
     for(a=0;a<25;a++)
-      arr[a]=-1;
+      randindex[a]=-1;
   }//运行周期结束，清空记录的索引
 return n;
 }
